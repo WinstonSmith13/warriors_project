@@ -12,6 +12,25 @@ public class Warrior {
     private int defense;
     private int attack;
 
+private Shield shield;
+
+private Weapon weapon;
+
+private Warrior(){
+}
+
+public Warrior (String name, int health, int defense, int attack){
+    this();
+    this.name = name;
+    this.health = health;
+    this.defense = defense;
+    this.attack = attack;
+}
+
+@Override
+    public String toString(){
+    return name + "(health = " + health + HEALTH_EMOJI + ", defense =" + defense + DEFENSE_EMOJI + ", attack = " + attack + ATTACK_EMOJI + ", shield = " + shield + ", weapon = " + weapon + ")";
+}
 
 
 
