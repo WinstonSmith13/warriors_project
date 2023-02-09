@@ -32,6 +32,38 @@ public Warrior (String name, int health, int defense, int attack){
     return name + "(health = " + health + HEALTH_EMOJI + ", defense =" + defense + DEFENSE_EMOJI + ", attack = " + attack + ATTACK_EMOJI + ", shield = " + shield + ", weapon = " + weapon + ")";
 }
 
+public void attack (Warrior opponent){
+    int attackBonus = weapon == null ? 0 : weapon.getAttackBonus();
+    int cumulatedAttack = attack + attackBonus;
+
+    String msgDetails = "+" + attack + ATTACK_EMOJI;
+    msgDetails += " +" + attackBonus + Weapon.WEAPON_EMOJI;
+    String msg = name + " : I attack " + opponent.name + " with " + cumulatedAttack + " (" + msgDetails + ")" + " points";
+    System.out.println(msg);
+
+    opponent.defend(this, cumulatedAttack);
+}
+
+    private void defend(Warrior opponent, int attack) {
+        int shieldDefenseBonus = shield == null ? 0 : shield.getDefenseBonus();
+        int cumulatedDefense = defense + shieldDefenseBonus;
+
+        int damage = Math.max(0, attack - cumulatedDefense);
+        health = Math.max(0, health - damage);
+
+        String msgDetails = "+" + defense + DEFENSE_EMOJI;
+        msgDetails += " +" + shieldDefenseBonus + Shield.SHIELD_EMOJI;
+        String msg = name + " : I defend against " + opponent.name + " with " + cumulatedDefense + " (" + msgDetails + ") points : " + damage + " damage points -> health = " + health + HEALTH_EMOJI;
+        System.out.println(msg);
+
+        // Drop eventually Shield when damage is too high (it breaks !)
+        if (shield != null && attack > shieldDefenseBonus) {
+            dropShield();
+        }
+    }
+
+    private void dropShield() {
+    }
 
 
 }
