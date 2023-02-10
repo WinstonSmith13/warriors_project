@@ -63,7 +63,9 @@ public void attack (Warrior opponent){
     }
 
     private void dropShield() {
-    }
+    System.out.println(name + " : Je dois déposé mon bouclier (il est cassé) ! : " + this.shield);
+    shield = null;
+}
 
 
 }
